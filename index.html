@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+body {
+  background-color: lightyellow;
+}
+#box {
+  position:fixed;
+  top: 50%;
+  left: 50%;
+  width:600px;
+  height:600px;
+  margin-top: -300px; /*set to a negative number 1/2 of your height*/
+  margin-left: -300px; /*set to a negative number 1/2 of your width*/
+}
+#star {
+  position: absolute;
+  top: 0px; left: 0px;
+  animation: example 20s infinite linear;
+}
+#nutella-box {
+  position: absolute;
+  top: 0px; left: 0px;
+  width: 600px;
+  height: 600px;
+}
+#nutella-png {
+  display: inline-block;
+  position: absolute;
+  top: 75px; left: 75px;
+}
+.grid-container {
+  display: grid;
+  /*grid-template-columns: auto auto auto;*/
+  /*grid-template-rows: auto auto auto;*/
+}
+/* Standard syntax */
+@keyframes example {
+  from {}
+  to {transform: rotate(360deg);}
+}
+</style>
+</head>
+<body>
+
+  <!--<div class="grid-container">
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item">
+  -->
+      <div id="box">
+        <canvas id="star" width=600 height=600></canvas>
+        <div id="nutella-box"><img id="nutella-png" width=450 height=450 src="nutella.png"></img></div>
+      </div>
+    <!--
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>-->
+  </div>
+
+<script>
+  var canvas = document.getElementById("star");
+
+  num_spikes = 23;  
+  outer_radius = canvas.width / 2;
+  inner_radius = Math.max(0, outer_radius * 0.8);
+
+  // Angular step per half-spike..
+  rot_step = 2 * Math.PI / (num_spikes * 2);
+
+  centre_x = outer_radius;
+  centre_y = outer_radius;
+
+  var ctx = canvas.getContext("2d");
+  ctx.beginPath();
+
+  // The top of the star is always dirextly above the centre of the circle.
+  ctx.moveTo(centre_x, centre_y - outer_radius);
+  rot = 0;  // Rotation.
+  for (i = 0; i < num_spikes; i++) {
+    rot += rot_step;
+    inner_dx = inner_radius * Math.sin(rot);
+    inner_dy = inner_radius * Math.cos(rot);
+    ctx.lineTo(centre_x + inner_dx, centre_y - inner_dy);
+
+    rot += rot_step;
+    outer_dx = outer_radius * Math.sin(rot);
+    outer_dy = outer_radius * Math.cos(rot);
+    ctx.lineTo(centre_x + outer_dx, centre_y - outer_dy);
+  }
+  ctx.closePath();
+  ctx.linewidth=5;
+  ctx.strokeStyle = "blue";
+  ctx.stroke();
+  ctx.fillStyle = "skyBlue";
+  ctx.fill();
+</script>
+</body>
+</html>
+
