@@ -2,19 +2,22 @@
 <html>
 <head>
 <style> 
+/* credit: Luke */
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: lightyellow;
+  height: 100vh;
+  width: 100vw;
 }
 #box {
-  position:fixed;
-  top: 50%;
-  left: 50%;
-  width:600px;
+  position: relative;
+  width:750px;
   height:600px;
-  margin-top: -300px; /*set to a negative number 1/2 of your height*/
-  margin-left: -300px; /*set to a negative number 1/2 of your width*/
 }
 #star {
+  /*z-index: 0;*/
   position: absolute;
   top: 0px; left: 0px;
   animation: example 20s infinite linear;
@@ -30,10 +33,24 @@ body {
   position: absolute;
   top: 75px; left: 75px;
 }
-.grid-container {
-  display: grid;
-  /*grid-template-columns: auto auto auto;*/
-  /*grid-template-rows: auto auto auto;*/
+#face-box {
+  /*z-index:-1;*/
+  position: absolute;
+  bottom: 0px; right: 0px;
+  background: pink;
+  width: 300px;
+  height: 300px;
+  border: solid 1px blue;
+}
+#arya-face {
+  /*z-index: 99;*/
+  transform: translateZ(0);
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+.bottom-right {
+  position: absolute;
+  bottom: 0px; right: 0px;
 }
 /* Standard syntax */
 @keyframes example {
@@ -44,24 +61,12 @@ body {
 </head>
 <body>
 
-  <!--<div class="grid-container">
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item">
-  -->
-      <div id="box">
-        <canvas id="star" width=600 height=600></canvas>
-        <div id="nutella-box"><img id="nutella-png" width=450 height=450 src="img/nutella.png"></img></div>
-      </div>
-    <!--
-    </div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>-->
-  </div>
+<div id="box">
+  <div class="bottom-right" id="face-box"></div>
+  <canvas id="star" width=600 height=600></canvas>
+  <div id="nutella-box"><img id="nutella-png" width=450 height=450 src="img/nutella.png" /></div>
+  <img class="bottom-right" id="arya-face" width=300 src="img/arya.png" />
+</div>
 
 <script>
   var canvas = document.getElementById("star");
