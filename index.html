@@ -28,7 +28,6 @@ body {
   height:600px;
 }
 #star {
-  /*z-index: 0;*/
   position: absolute;
   top: 0px; left: 0px;
   animation: example 20s infinite linear;
@@ -45,7 +44,6 @@ body {
   top: 75px; left: 75px;
 }
 #face-box {
-  /*z-index:-1;*/
   position: absolute;
   bottom: 0px; right: 0px;
   background: pink;
@@ -54,7 +52,6 @@ body {
   border: solid 1px blue;
 }
 #arya-face {
-  /*z-index: 99;*/
   transform: translateZ(0);
   margin-bottom: 20px;
   margin-right: 20px;
@@ -86,7 +83,7 @@ body {
   outer_radius = canvas.width / 2;
   inner_radius = Math.max(0, outer_radius * 0.8);
 
-  // Angular step per half-spike..
+  // Angular step per half-spike.
   rot_step = 2 * Math.PI / (num_spikes * 2);
 
   centre_x = outer_radius;
@@ -97,7 +94,9 @@ body {
 
   // The top of the star is always dirextly above the centre of the circle.
   ctx.moveTo(centre_x, centre_y - outer_radius);
-  rot = 0;  // Rotation.
+  rot = 0;
+  // At every angular step, pick the point on the inner or outer circle
+  // and plot a line there.
   for (i = 0; i < num_spikes; i++) {
     rot += rot_step;
     inner_dx = inner_radius * Math.sin(rot);
